@@ -6,235 +6,142 @@
 <title>Phục Chân Lục</title>
 
 <style>
-body{
-  margin:0;
-  font-family:"Times New Roman",serif;
-  background:#f8f5e6;
-  color:#111;
-  overflow-x:hidden;
-}
+body{margin:0;font-family:"Times New Roman",serif;background:#f8f5e6;color:#111;overflow-x:hidden}
 
-.banner{
-  height:300px;
-  background:url('images/banner.jpg') center/cover no-repeat fixed;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  position:relative;
-}
-.banner::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-}
-.banner h1{
-  position:relative;
-  color:#fff;
-  font-size:48px;
-  letter-spacing:6px;
-  animation:fadeIn 2s ease;
-}
+.banner{height:300px;background:url('images/banner.jpg') center/cover no-repeat fixed;display:flex;align-items:center;justify-content:center;position:relative}
+.banner::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.6)}
+.banner h1{position:relative;color:#fff;font-size:48px;letter-spacing:6px;animation:fadeIn 2s}
 
-nav{
-  display:flex;
-  justify-content:center;
-  background:#111;
-}
-nav a{
-  padding:15px 25px;
-  color:#fff;
-  text-decoration:none;
-}
-nav a.active{
-  background:#d4af37;
-  color:#000;
-  font-weight:bold;
-}
+nav{display:flex;justify-content:center;background:#111}
+nav a{padding:15px 25px;color:#fff;text-decoration:none}
+nav a.active{background:#d4af37;color:#000;font-weight:bold}
 
 .section{display:none;padding:20px}
 .section.active{display:block}
 
-.card{
-  border:2px solid #d4af37;
-  padding:20px;
-  background:#fff;
-  max-width:800px;
-  margin:auto;
-}
+.card{border:2px solid #d4af37;padding:20px;background:#fff;max-width:800px;margin:auto}
 
-.typing p{
-  opacity:0;
-  transform:translateY(10px);
-  animation:lineAppear 1s forwards;
-}
-.typing p:nth-child(1){animation-delay:0.5s}
+.typing p{opacity:0;transform:translateY(10px);animation:lineAppear 1s forwards}
+.typing p:nth-child(1){animation-delay:.5s}
 .typing p:nth-child(2){animation-delay:1.5s}
 .typing p:nth-child(3){animation-delay:2.5s}
 
-@keyframes lineAppear{
-  to{opacity:1; transform:translateY(0)}
-}
+@keyframes lineAppear{to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-@keyframes fadeIn{
-  from{opacity:0} to{opacity:1}
-}
-
-.map-container{
-  position:relative;
-}
+.map-container{position:relative}
 .map-container img{width:100%}
+svg{position:absolute;top:0;left:0;width:100%;height:100%}
+path{fill:transparent;cursor:pointer}
 
-svg{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-}
-
-path{
-  fill:transparent;
-  cursor:pointer;
-}
-
-.popup{
-  position:fixed;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  background:#fff;
-  border:3px solid #d4af37;
-  width:90%;
-  max-height:90vh;
-  display:none;
-  flex-direction:column;
-}
+.popup{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border:3px solid #d4af37;width:90%;max-height:90vh;display:none;flex-direction:column}
 .popup img{width:100%}
-.popup-content{
-  overflow-y:auto;
-  padding:15px;
-}
-
+.popup-content{overflow-y:auto;padding:15px}
 .close{cursor:pointer;text-align:right;padding:10px}
 
-.jobs{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:10px;
-}
-.job{cursor:pointer;transition:.3s;border:2px solid #000}
-.job img{width:100%}
-.job:hover{transform:scale(1.05)}
+.jobs{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
+.job{cursor:pointer;text-align:center}
+.job img{width:100%;aspect-ratio:1/1;object-fit:cover;border:2px solid #000;transition:.3s}
+.job:hover img{transform:scale(1.05)}
+.job-name{margin-top:5px;font-weight:bold}
 
-.job-info{
-  position:fixed;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  background:#fff;
-  padding:20px;
-  border:3px solid #000;
-  display:none;
-}
+.job-info{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;padding:20px;border:3px solid #000;display:none;max-width:90%}
 
 </style>
 </head>
 
 <body>
 
-<div class="banner">
-  <h1>PHỤC CHÂN LỤC</h1>
-</div>
+<div class="banner"><h1>PHỤC CHÂN LỤC</h1></div>
 
 <nav>
-  <a onclick="showSection('home')" id="btn-home">Tổng quan</a>
-  <a onclick="showSection('map')" id="btn-map">Bản đồ</a>
-  <a onclick="showSection('job')" id="btn-job">Nghề nghiệp</a>
-  <a onclick="showSection('rule')" id="btn-rule">Quy tắc</a>
+<a onclick="showSection('home')" id="btn-home">Tổng quan</a>
+<a onclick="showSection('map')" id="btn-map">Bản đồ</a>
+<a onclick="showSection('job')" id="btn-job">Nghề nghiệp</a>
+<a onclick="showSection('rule')" id="btn-rule">Quy tắc</a>
 </nav>
 
 <div id="home" class="section active">
-  <div class="card typing">
-    <p>Tương truyền từ vạn năm trước, thiên địa thành hình, Phục Chân ra đời</p>
-    <p>Cả đại lục chia thành 5 châu lớn và Thiên đảo nằm ngoài đại dương</p>
-    <p>Lịch sử mở ra...</p>
-  </div>
+<div class="card typing">
+<p>Tương truyền từ vạn năm trước, thiên địa thành hình, Phục Chân ra đời</p>
+<p>Cả đại lục chia thành 5 châu lớn và Thiên đảo nằm ngoài đại dương</p>
+<p>Lịch sử mở ra...</p>
+</div>
 </div>
 
 <div id="map" class="section">
-  <div class="map-container">
-    <img src="images/dailucchinh.jpg">
+<div class="map-container">
+<img src="images/dailucchinh.jpg">
 
-    <svg viewBox="0 0 1600 900" preserveAspectRatio="none">
-      <path d="M0,300 L400,300 L400,800 L0,800 Z" onclick="openMap('taychau')"/>
-      <path d="M1200,300 L1600,300 L1600,800 L1200,800 Z" onclick="openMap('dongchau')"/>
-      <path d="M400,0 L1200,0 L1200,200 L400,200 Z" onclick="openMap('bacchau')"/>
-      <path d="M400,700 L1200,700 L1200,900 L400,900 Z" onclick="openMap('namchau')"/>
-      <path d="M500,300 L1100,300 L1100,700 L500,700 Z" onclick="openMap('trungchau')"/>
-      <path d="M1200,0 L1600,0 L1600,300 L1200,300 Z" onclick="openMap('thiendao')"/>
-    </svg>
+<svg viewBox="0 0 1600 900" preserveAspectRatio="none">
+<!-- Tây châu -->
+<path d="M0,350 L350,300 L420,500 L300,800 L0,800 Z" onclick="openMap('taychau')"/>
+<!-- Đông châu -->
+<path d="M1150,350 L1600,300 L1600,800 L1250,780 L1100,550 Z" onclick="openMap('dongchau')"/>
+<!-- Bắc châu -->
+<path d="M350,0 L1200,0 L1100,250 L450,250 Z" onclick="openMap('bacchau')"/>
+<!-- Nam châu -->
+<path d="M450,650 L1100,650 L1000,900 L500,900 Z" onclick="openMap('namchau')"/>
+<!-- Trung châu -->
+<path d="M450,300 L1100,300 L1050,650 L500,650 Z" onclick="openMap('trungchau')"/>
+<!-- Thiên đảo -->
+<path d="M1200,0 L1600,0 L1600,300 L1300,280 Z" onclick="openMap('thiendao')"/>
+</svg>
 
-  </div>
+</div>
 </div>
 
 <div id="job" class="section">
-  <div class="jobs">
-    <div class="job" onclick="showJob('Kiếm tu')"><img src="images/kiemtu.jpg"></div>
-    <div class="job" onclick="showJob('Thể tu')"><img src="images/thetu.jpg"></div>
-    <div class="job" onclick="showJob('Phù tu')"><img src="images/phutu.jpg"></div>
-    <div class="job" onclick="showJob('Trận tu')"><img src="images/trantu.jpg"></div>
-    <div class="job" onclick="showJob('Phật tu')"><img src="images/phattu.jpg"></div>
-    <div class="job" onclick="showJob('Đan tu')"><img src="images/dantu.jpg"></div>
-  </div>
+<div class="jobs">
+<div class="job" onclick="showJob('Kiếm tu')"><img src="images/kiemtu.jpg"><div class="job-name">Kiếm tu</div></div>
+<div class="job" onclick="showJob('Thể tu')"><img src="images/thetu.jpg"><div class="job-name">Thể tu</div></div>
+<div class="job" onclick="showJob('Phù tu')"><img src="images/phutu.jpg"><div class="job-name">Phù tu</div></div>
+<div class="job" onclick="showJob('Trận tu')"><img src="images/trantu.jpg"><div class="job-name">Trận tu</div></div>
+<div class="job" onclick="showJob('Phật tu')"><img src="images/phattu.jpg"><div class="job-name">Phật tu</div></div>
+<div class="job" onclick="showJob('Đan tu')"><img src="images/dantu.jpg"><div class="job-name">Đan tu</div></div>
+</div>
 </div>
 
-<div id="rule" class="section">
-  <div class="card">Quy tắc đang cập nhật...</div>
-</div>
+<div id="rule" class="section"><div class="card">Quy tắc đang cập nhật...</div></div>
 
 <div class="popup" id="popup">
-  <div class="close" onclick="closePopup()">Đóng</div>
-  <img id="popup-img">
-  <div class="popup-content" id="popup-text"></div>
+<div class="close" onclick="closePopup()">Đóng</div>
+<img id="popup-img">
+<div class="popup-content" id="popup-text"></div>
 </div>
 
 <div class="job-info" id="jobInfo">
-  <div onclick="closeJob()">Đóng</div>
-  <p id="jobText"></p>
+<div onclick="closeJob()">Đóng</div>
+<p id="jobText"></p>
 </div>
 
 <script>
 function showSection(id){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
 
-  document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
-  document.getElementById('btn-'+id).classList.add('active');
+document.querySelectorAll('nav a').forEach(a=>a.classList.remove('active'));
+document.getElementById('btn-'+id).classList.add('active');
 
-  localStorage.setItem('page',id);
+localStorage.setItem('page',id);
 }
 
-window.onload=function(){
-  showSection(localStorage.getItem('page')||'home');
-}
+window.onload=function(){showSection(localStorage.getItem('page')||'home')}
 
 function openMap(region){
-  document.getElementById('popup').style.display='flex';
-  document.getElementById('popup-img').src='images/'+region+'.jpg';
-  document.getElementById('popup-text').innerHTML=`<p><b>${region}</b></p><p>Thông tin chi tiết đang cập nhật...</p>`;
+document.getElementById('popup').style.display='flex';
+document.getElementById('popup-img').src='images/'+region+'.jpg';
+document.getElementById('popup-text').innerHTML=`<p><b>${region}</b></p><p>Thông tin chi tiết của vùng này đang được ghi chép trong cổ tịch...</p>`;
 }
 
-function closePopup(){
-  document.getElementById('popup').style.display='none';
-}
+function closePopup(){document.getElementById('popup').style.display='none'}
 
 function showJob(name){
-  document.getElementById('jobInfo').style.display='block';
-  document.getElementById('jobText').innerText=name+" - hệ tu luyện riêng biệt, sở hữu sức mạnh độc đáo.";
+document.getElementById('jobInfo').style.display='block';
+document.getElementById('jobText').innerText=name+" - con đường tu luyện riêng, mỗi hệ đều có bí pháp và cảnh giới khác nhau.";
 }
 
-function closeJob(){
-  document.getElementById('jobInfo').style.display='none';
-}
+function closeJob(){document.getElementById('jobInfo').style.display='none'}
 </script>
 
 </body>
