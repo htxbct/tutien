@@ -89,29 +89,13 @@ nav a.active{
 
 /* ===== MAP ===== */
 .map-container{
-  position:relative;
-  width:100%;
   max-width:1000px;
   margin:auto;
 }
-
 .map-container img{
   width:100%;
+  height:auto;
   display:block;
-}
-
-/* QUAN TRỌNG: fix lệch bằng overlay tuyệt đối */
-.map-overlay{
-  position:absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-}
-
-.region{
-  position:absolute;
-  cursor:pointer;
 }
 
 /* ===== POPUP MAP ===== */
@@ -128,14 +112,11 @@ nav a.active{
   flex-direction:column;
   z-index:1000;
 }
-
 .popup img{width:100%}
-
 .popup-content{
   overflow-y:auto;
   padding:15px;
 }
-
 .close{
   cursor:pointer;
   text-align:right;
@@ -151,25 +132,21 @@ nav a.active{
   max-width:600px;
   margin:auto;
 }
-
 .job{
   text-align:center;
   cursor:pointer;
   transition:.3s;
 }
-
 .job img{
   width:100%;
   aspect-ratio:1/1;
   object-fit:cover;
   border:2px solid #000;
 }
-
 .job span{
   display:block;
   margin-top:5px;
 }
-
 .job:hover{
   transform:scale(1.05);
 }
@@ -183,7 +160,6 @@ nav a.active{
   align-items:center;
   justify-content:center;
 }
-
 .job-box{
   background:#fff;
   padding:20px;
@@ -220,30 +196,21 @@ nav a.active{
 <div id="map" class="section">
   <div class="map-container">
 
-    <img src="images/dailucchinh.jpg">
+    <img src="images/dailucchinh.jpg" usemap="#image-map">
 
-    <!-- Overlay chuẩn tỷ lệ % (KHÔNG LỆCH MOBILE) -->
-    <div class="map-overlay">
-
-      <!-- Tây châu -->
-      <div class="region" style="left:0%;top:30%;width:25%;height:55%;" onclick="openMap('taychau')"></div>
-
-      <!-- Đông châu -->
-      <div class="region" style="left:75%;top:30%;width:25%;height:55%;" onclick="openMap('dongchau')"></div>
-
-      <!-- Bắc châu (FIX lỗi bạn bị thiếu) -->
-      <div class="region" style="left:25%;top:0%;width:50%;height:22%;" onclick="openMap('bacchau')"></div>
-
-      <!-- Nam châu -->
-      <div class="region" style="left:25%;top:75%;width:50%;height:25%;" onclick="openMap('namchau')"></div>
-
-      <!-- Trung châu -->
-      <div class="region" style="left:32%;top:32%;width:36%;height:40%;" onclick="openMap('trungchau')"></div>
-
-      <!-- Thiên đảo -->
-      <div class="region" style="left:75%;top:0%;width:25%;height:25%;" onclick="openMap('thiendao')"></div>
-
-    </div>
+    <map name="image-map">
+      <area shape="poly" coords="557,362,682,339,792,223,515,183,352,254,553,358,553,354" href="javascript:void(0)" onclick="openMap('bacchau')">
+      
+      <area shape="poly" coords="796,468,684,341,565,404,601,476" href="javascript:void(0)" onclick="openMap('trungchau')">
+      
+      <area shape="poly" coords="314,281,538,387,555,509,298,617,210,441" href="javascript:void(0)" onclick="openMap('taychau')">
+      
+      <area shape="poly" coords="538,532,428,644,754,675,974,617,808,485" href="javascript:void(0)" onclick="openMap('namchau')">
+      
+      <area shape="poly" coords="831,237,721,347,846,478,1001,543,1086,474,976,277" href="javascript:void(0)" onclick="openMap('dongchau')">
+      
+      <area shape="poly" coords="1144,100,1039,243,1194,401,1302,259" href="javascript:void(0)" onclick="openMap('thiendao')">
+    </map>
 
   </div>
 </div>
@@ -290,7 +257,7 @@ nav a.active{
   <div class="card">Quy tắc đang cập nhật...</div>
 </div>
 
-<!-- MAP POPUP -->
+<!-- POPUP MAP -->
 <div class="popup" id="popup">
   <div class="close" onclick="closePopup()">Đóng</div>
   <img id="popup-img">
@@ -303,6 +270,8 @@ nav a.active{
     <p id="jobText"></p>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/image-map-resizer@1.0.10/js/imageMapResizer.min.js"></script>
 
 <script>
 
@@ -319,6 +288,7 @@ function showSection(id){
 
 window.onload=function(){
   showSection(localStorage.getItem('page')||'home');
+  imageMapResize(); // FIX lệch mobile
 }
 
 /* ===== MAP ===== */
