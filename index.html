@@ -345,11 +345,11 @@ function openMap(region){
   document.getElementById('popup').style.display='flex';
   document.getElementById('popup-img').src='images/'+region+'.jpg';
 
-  document.getElementById('popup-text').innerHTML = `
+  document.getElementById('popup-text').innerHTML = 
     <h3>${region.toUpperCase()}</h3>
     <p>Khu vực rộng lớn với đặc điểm riêng biệt.</p>
     <p>Thông tin đang được ghi chép thêm...</p>
-  `;
+  ;
 }
 
 function closePopup(){
